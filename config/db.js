@@ -14,10 +14,14 @@ async function getTransactions() {
     const collection = client.db("test").collection(COLLECTION_NAME);
     const transactions = await collection
       .find({
-        $or: [{ type: "subscription" }, { type: "exchange" }],
+        $or: [
+          { type: "subscription", isOwner: false },
+          { type: "exchange", isOwner: true },
+        ],
         status: "completed",
       })
       .toArray();
+    console.log(transactions);
     return transactions;
   } catch (err) {
     console.error("Error during scanTransaction:", err);
