@@ -21,7 +21,6 @@ async function getTransactions() {
         status: "completed",
       })
       .toArray();
-    console.log(transactions);
     return transactions;
   } catch (err) {
     console.error("Error during scanTransaction:", err);

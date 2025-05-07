@@ -62,6 +62,8 @@ async function scanTransaction() {
   try {
     const txs = await getTransactions();
 
+    console.log(txs.length, txLength);
+
     if (!txs || txs.length === 0) return;
 
     if (txLength === 0) {
@@ -71,7 +73,9 @@ async function scanTransaction() {
 
     if (txLength < txs.length) {
       const totalAmount = getTotalBoughtAmount(txs);
+      console.log(totalAmount);
       const currentAmount = getCurrentBoughtAmount(txs[txs.length - 1], txs);
+      console.log(currentAmount);
       await sendMessage(
         totalAmount.toFixed(2),
         currentAmount.toFixed(2),
@@ -119,7 +123,7 @@ ${
 
 scanTransaction();
 
-setInterval(scanTransaction, 120000);
+setInterval(scanTransaction, 30000);
 
 console.log("Bot started and scanning for transactions every 2 minutes");
 
